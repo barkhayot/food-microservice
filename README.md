@@ -25,3 +25,10 @@ pip install requirements.txt
 <p float="left">
   <img src="https://github.com/barkhayot/food-microservice/blob/main/rer.jpg" alt="Markdown Monster icon" style="width:100%"/>
   </p>
+
+
+### scree of usage
+
+<p float="left">
+  <img src="https://github.com/barkhayot/food-microservice/blob/main/rer.jpg" alt="Markdown Monster icon" style="width:100%"/>
+  </p>

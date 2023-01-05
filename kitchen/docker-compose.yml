@@ -1,0 +1,12 @@
+
+version: '3'
+services:
+  webapp:
+    image: python:3.10
+    command: bash -c "-N elasticsearch -L 0.0.0.0:22181:localhost:22181 && pip3 install django black click kafka-python mypy-extensions pathspec platformdirs tomli typing-extensions && python /main/orders/consumer.py"
+    # command: 
+    # command: python /main/orders/consumer.py 
+    ports:
+      - "4000:4000"
+    volumes: 
+      - ./:/main

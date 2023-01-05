@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FastFood</title>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+    <!-- CSS only -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+
+<style>
+        body{background-color:rgb((255, 255, 255), 255, 255)!important;
+	
+}
+#profile-wrapper{
+	text-align: center;
+}
+
+#profile-pic{
+	width:100px;
+	height: 100px;
+	border-radius: 50%;
+	margin-left: auto;
+  	margin-right: auto;
+}
+
+ul{
+	padding: 0;
+    list-style-type: none;
+}
+
+
+.social-links ul, li{
+	list-style-type:none;
+	display: inline-block;
+}
+
+.social{
+	width:20px;
+	height: 20px;
+}
+
+.navbar-brand{
+	position: relative;
+	left: 15%;
+	
+}
+.nav-link{
+    position: relative;
+    right: 5%;
+}
+
+.navbar-brand h3{
+	font-size: 25px;
+  	font-weight: 700;
+	letter-spacing: 0;
+}
+
+.navbar-nav{
+	position: relative;
+	left: 70%;
+}
+
+
+
+.footer{
+
+	position: fixed;
+	bottom: 5%;
+	width: 100%;
+	color: lightslategray;
+	text-align: center;
+	
+}
+#profile-pics{
+	width: 150px;
+	height: 150px;
+	border-radius: 50%;
+	margin-left: auto;
+  	margin-right: auto;
+}
+#profile-picsr{
+	width: 250px;
+	height: 250px;
+	border-radius: 50%;
+	margin-left: auto;
+  	margin-right: auto;
+}
+#profile-picsd{
+	width: 200px;
+	height: 200px;
+	border-radius: 20%;
+	margin-left: auto;
+ 	margin-right: auto;
+}
+
+    </style>
+
+</head>
+<body>
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-dark" style="background-color: rgb(189, 156, 58);">
+            <a href="" class="navbar-brand"><h3>FastFood</h3></a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav mr-auto">
+                
+                <li class="nav-item active ">
+                    <a class="nav-link" href="">Welcome</a>
+                </li>
+                
+                </ul>
+            </div>
+        </nav>
+        
+        <br>
+    
+    </header> 
+    <div class="container">
+    <div class="row text-center" style="margin-top: 60px;">
+        <h3 style="margin: 3%;">Staff Page</h3>
+        <table class="table">
+            <thead>
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">Food</th>
+                <th scope="col">Quantity</th>
+                <th scope="col">Price</th>
+                <th scope="col">Confirm</th>
+              </tr>
+            </thead>
+            <tbody id="display">
+              
+              
+            </tbody>
+          </table>
+    </div>
+</div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.6.1.js" integrity="sha256-3zlB5s2uwoUzrXK3BT7AX3FyvojsraNFxCc2vC/7pNI=" crossorigin="anonymous"></script>
+    <script>
+      $(document).ready(function(){
+        var lastResponse = 0
+        
+        //console.log(div)
+        
+        
+        setInterval(function(){
+          $.ajax({
+            type:"GET",
+            url: "{% url 'db' %}",
+            success: function(response){
+              console.log(response);
+              $("#display").empty();
+              
+              $.each(response, function(key, data) 
+              {
+                var k = response[key].status;
+                console.log(k)
+
+                var temp="<tr>"+
+                            "<th scope='row'>"+response[key].id+"</th>"+
+                            "<td>"+response[key].food+"</td><td>"+ response[key].quantity +"</td>"+ "<td>"+ response[key].price +"</td>"+"<td><a href='/order/detail/"+response[key].id+"' class='btn btn-primary' type='submit'>Detail</a>"+"</tr>";
+
+                $("#display").append(temp); 
+              })
+            //   if (response.length != lastResponse) {
+            //       var audio = new Audio('http://papamarketcorp.kr:8261/files/16699709887442744-test.wav')
+            //       audio.play()
+            //        console.log( lastResponse)
+            //        console.log( response.length)
+            //        var div = document.getElementById('kkk');
+            //        var originalColor = getComputedStyle(div).backgroundColor;
+                   
+            //        div.style.backgroundColor = "red";
+
+              
+            //         setTimeout(function(){
+            //             div.style.backgroundColor = 'white';
+            //             }, 2000);
+                
+              
+                  
+            //       // Set a timer to run the passed function after 1000 milliseconds (1 second)
+                  
+            //   }
+              lastResponse = response.length
+              console.log(lastResponse)
+
+              
+             },
+            error: function(response){
+              alert("No DATA FOUND");
+            }
+          });
+        }, 2000)
+      });
+
+    </script>  
+    
+</body>
+</html>

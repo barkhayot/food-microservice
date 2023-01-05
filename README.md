@@ -21,6 +21,23 @@ pip install requirements.txt
 
 ```
 
+In order to run multithreading script open new terminal and run following script
+
+```sh
+
+python3 manage.py run_script
+
+```
+
+
+The following script has been added inside app folder 
+
+```sh
+
+project/app/management/commands --> run_script.py
+
+```
+
 ### explanation
 <p float="left">
   <img src="https://github.com/barkhayot/food-microservice/blob/main/rer.jpg" alt="Markdown Monster icon" style="width:100%"/>
